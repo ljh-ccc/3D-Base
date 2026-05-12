@@ -111,6 +111,9 @@ namespace StarterAssets
         private bool _canAttack = true;
         private bool _canInteract = true;
 
+        [SerializeField] Attack attack;
+        [SerializeField] Interact interact;
+
 
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
@@ -143,6 +146,10 @@ namespace StarterAssets
             if (_mainCamera == null)
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+            }
+            if(attack == null)
+            {
+                attack = GetComponent<Attack>();
             }
         }
 
@@ -397,6 +404,7 @@ namespace StarterAssets
             {
                 _isAttack = true;
                 _animator.SetTrigger(_animIDAttack);
+                attack.StartAttack();
             }
 
             _input.attack = false;
@@ -448,11 +456,13 @@ namespace StarterAssets
                 return; 
             }
 
-            _isInteract = !_isInteract;
+            //_isInteract = !_isInteract;
 
             if (_hasAnimator)
             {
-                _animator.SetBool(_animIDInteract, _isInteract);
+                //_animator.SetBool(_animIDInteract, _isInteract);
+                _animator.SetTrigger(_animIDInteract);
+                interact.InteractObject();
             }
 
             _input.interact = false;
@@ -479,19 +489,6 @@ namespace StarterAssets
             _input.sprint = false;
             _input.jump = false;
             _input.attack = false;
-        }
-
-        void StartInteractCancle()
-        {
-            StartCoroutine(InteractCancleCoroutine());
-        }
-
-        IEnumerator InteractCancleCoroutine()
-        {
-            yield return coolTime;
-           
-            _isInteract = false;
-            _animator.SetBool(_animIDInteract, _isInteract);
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
