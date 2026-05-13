@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
@@ -104,15 +103,20 @@ namespace StarterAssets
         private int _animIDMotionSpeed;
         private int _animIDAttack;
         private int _animIDInteract;
+        private int _animIDFire;
 
         WaitForSeconds coolTime;
+        WaitForSeconds fireCoolTime;
         private bool _isInteract;
         private bool _isAttack;
+        private bool _isFire;
         private bool _canAttack = true;
         private bool _canInteract = true;
+        private bool _canFire = true;
 
         [SerializeField] Attack attack;
         [SerializeField] Interact interact;
+        [SerializeField] TwoPointScan fire;
 
 
 #if ENABLE_INPUT_SYSTEM 
@@ -173,6 +177,7 @@ namespace StarterAssets
             _fallTimeoutDelta = FallTimeout;
 
             coolTime = new WaitForSeconds(0.5f);
+            fireCoolTime = new WaitForSeconds(0.1f);
         }
 
         private void Update()
@@ -196,10 +201,18 @@ namespace StarterAssets
                 return;
             }
 
+            if (_isFire)
+            {
+                IsFire();
+                MoveStop();
+                return;
+            }
+
             JumpAndGravity();
             Move();
             Attack();
             Interact();
+            Fire();
         }
 
         private void LateUpdate()
@@ -216,6 +229,7 @@ namespace StarterAssets
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
             _animIDAttack = Animator.StringToHash("Attack");
             _animIDInteract = Animator.StringToHash("Interact");
+            _animIDFire = Animator.StringToHash("Fire");
         }
 
         private void GroundedCheck()
@@ -434,6 +448,7 @@ namespace StarterAssets
             _input.jump = false;
             _input.attack = false;
             _input.interact = false;
+            _input.fire = false;
         }
         private void MoveStop()
         {
@@ -489,6 +504,66 @@ namespace StarterAssets
             _input.sprint = false;
             _input.jump = false;
             _input.attack = false;
+            _input.fire = false;
+        }
+
+        void Fire()
+        {
+            if (!_input.fire) { return; }
+            if (!Grounded || !_canFire)
+            {
+                _input.fire = false;
+                return;
+            }
+
+            _isFire = true;
+
+            if (_hasAnimator)
+            {
+                _animator.SetTrigger(_animIDFire);
+            }
+
+            StartFire();
+
+            _input.fire = false;
+            StartFireCoolTime();
+        }
+
+        void StartFire()
+        {
+            StartCoroutine(SinkToAnimation());
+        }
+
+        IEnumerator SinkToAnimation()
+        {
+            yield return new WaitForSeconds(2.5f);
+
+            fire.Fire();
+        }
+
+        void StartFireCoolTime()
+        {
+            StartCoroutine(FireCoolTime());
+        }
+
+        IEnumerator FireCoolTime()
+        {
+            _canFire = false;
+
+            yield return fireCoolTime;
+
+            _isFire = false;
+            _canFire = true;
+        }
+
+        void IsFire()
+        {
+            _input.move = Vector2.zero;
+            _input.sprint = false;
+            _input.jump = false;
+            _input.attack = false;
+            _input.interact = false;
+            _input.fire = false;
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)

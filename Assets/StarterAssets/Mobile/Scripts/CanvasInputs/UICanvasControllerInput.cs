@@ -38,6 +38,11 @@ namespace StarterAssets
             starterAssetsInputs.InteractInput(virtualInteractState);
         }
 
+        public void VirtualFireInput(bool virtualFireState)
+        {
+            starterAssetsInputs.FireInput(virtualFireState);
+        }
+
     }
 
 }

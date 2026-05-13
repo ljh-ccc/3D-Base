@@ -14,9 +14,9 @@ public class ShootingRay : MonoBehaviour
     [SerializeField] public GameObject currentObj;
     [SerializeField] string interactMsg;
 
-    float screenWidth;
-    float screenHeight;
-    Vector2 screenCenter;
+    [SerializeField] Transform muzzle;
+
+    Vector3 screenCenter;
     
     WaitForSeconds coolTime;
     bool isDead;
@@ -28,9 +28,7 @@ public class ShootingRay : MonoBehaviour
         if (mainCamera == null) { mainCamera = Camera.main; }
         coolTime = new WaitForSeconds(0.5f);
         isDead = false;
-        screenWidth = Screen.width;
-        screenHeight = Screen.height;
-        screenCenter = new(Screen.width * 0.5f, Screen.height * 0.5f);
+        screenCenter = new Vector3(0.5f, 0.5f, 0f);
         interactMsg = null;
     }
 
@@ -52,11 +50,12 @@ public class ShootingRay : MonoBehaviour
     {
         while (!isDead)
         {
-            Ray ray = mainCamera.ScreenPointToRay(screenCenter);
+            Ray ray = mainCamera.ViewportPointToRay(screenCenter);
+            
 
             if (Physics.Raycast(ray, out RaycastHit hit, rayDistance, targetLayer, QueryTriggerInteraction.Ignore))
-            {
-                Debug.DrawRay(ray.origin, ray.direction * hit.distance, rayColor, 0.5f);
+            {    
+                Debug.DrawRay(muzzle.position, ray.direction * hit.distance, rayColor, 0.5f);
 
                 GameObject target = hit.collider.gameObject;
 
@@ -69,11 +68,12 @@ public class ShootingRay : MonoBehaviour
             }
             else
             {
-                Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.yellow, 0.5f);
+                Debug.DrawRay(muzzle.position, ray.direction * rayDistance, Color.yellow, 0.5f);
 
                 if(currentObj != null)
                 {
                     currentObj = null;
+                    OnTarget?.Invoke(currentObj);
                     interactMsg = null;
                     Debug.Log($"[ShootingRay] currentObj : {((currentObj == null) ? "null" : currentObj.name)}");
                 }
