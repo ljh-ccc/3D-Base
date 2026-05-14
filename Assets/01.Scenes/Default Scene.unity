@@ -755,6 +755,171 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4690775226228619946}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &150360971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 150360974}
+  - component: {fileID: 150360976}
+  - component: {fileID: 150360977}
+  m_Layer: 0
+  m_Name: UseItemTester
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &150360974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150360971}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -32.80196, y: 0, z: 19.89758}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &150360976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150360971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8325a5d668e9c244d8a52fb56438da57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_WeaponTestController
+  weapons:
+  - {fileID: 11400000, guid: f1a01bcdece46df47837602664f78977, type: 2}
+  - {fileID: 11400000, guid: 8a71d0e9b027c624997c868394bfc93c, type: 2}
+  - {fileID: 11400000, guid: b740fcbc7bb71f54b84d53197887cc24, type: 2}
+  - {fileID: 11400000, guid: a00da9c38690cd640b4e95a993de8071, type: 2}
+  equipWeapon1Action:
+    m_Name: EquipWeapon1
+    m_Type: 1
+    m_ExpectedControlType: 
+    m_Id: 63ef5cb0-306c-4896-8d72-925cc81fc4e0
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 15fdb2a1-05d9-48c8-bff3-3674f5c16160
+      m_Path: <Keyboard>/1
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: EquipWeapon1
+      m_Flags: 0
+    m_Flags: 0
+  equipWeapon2Action:
+    m_Name: EquipWeapon2
+    m_Type: 1
+    m_ExpectedControlType: 
+    m_Id: 2ad50187-a316-4d8a-8b96-3a9a30166551
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 1d6b3619-1b9d-40ae-8d3a-ab07444d845b
+      m_Path: <Keyboard>/2
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: EquipWeapon2
+      m_Flags: 0
+    m_Flags: 0
+  equipWeapon3Action:
+    m_Name: EquipWeapon3
+    m_Type: 1
+    m_ExpectedControlType: 
+    m_Id: 4aaa5d64-56b1-484b-a4c2-ee6687ef12d1
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: eb29c6e2-8d53-4c0f-8b5f-259d0a5515e2
+      m_Path: <Keyboard>/3
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: EquipWeapon3
+      m_Flags: 0
+    m_Flags: 0
+  equipWeapon4Action:
+    m_Name: EquipWeapon4
+    m_Type: 1
+    m_ExpectedControlType: 
+    m_Id: b2572fe0-96e7-46fe-ad70-4009b933649c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 215af999-5752-4236-8db9-a97a4285cae7
+      m_Path: <Keyboard>/4
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: EquipWeapon4
+      m_Flags: 0
+    m_Flags: 0
+  attackAction:
+    m_Name: Attack
+    m_Type: 1
+    m_ExpectedControlType: 
+    m_Id: 9e4ff58f-62f6-480a-9eb8-7690ecd598e8
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c1ae776b-738e-4e26-8b43-12ebecf5057d
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Attack
+      m_Flags: 0
+    m_Flags: 0
+  reloadAction:
+    m_Name: Reload
+    m_Type: 1
+    m_ExpectedControlType: 
+    m_Id: e18639d8-41d6-4291-ae0b-a8469f7e9f9b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 973272b4-d669-40c8-9355-1142c99196c6
+      m_Path: <Keyboard>/r
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Reload
+      m_Flags: 0
+    m_Flags: 0
+--- !u!114 &150360977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150360971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64023245b2478d9448540800489686e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_PlayerData
+  jobType: 3
 --- !u!1 &170084606
 GameObject:
   m_ObjectHideFlags: 0
@@ -22612,3 +22777,4 @@ SceneRoots:
   - {fileID: 1193644225}
   - {fileID: 1892221801}
   - {fileID: 386958004}
+  - {fileID: 150360974}
